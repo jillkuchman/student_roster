@@ -1,21 +1,29 @@
 <!DOCTYPE html>
-<html lang='en' ng-app='studentRoster'>
+<html lang="en" ng-app="studentRoster">
 <head>
-    <meta charset='UTF-8'>
+    <meta charset="UTF-8">
     <title>Student App</title>
-    <script src='lib/angular.js'></script>
-    <script src='app.js'></script>
-    <script src='js/StudentsController.js'></script>
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
+    <script src="lib/angular.js"></script>
+    <script src="app.js"></script>
+    <script src="js/StudentsController.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 </head>
 <body>
-    <div class='container' ng-controller='StudentsCtrl'>
-        <div class='row'>
-            <div class='col-md-12'>
+    <div class="container" ng-controller="StudentsCtrl">
+        <div class="row">
+            <div class="col-md-12">
                 <h2>Student List</h2>
                 <ul>
-                    <li ng-repeat='item in students'>
-                        {{ item.name }} <a ng-click='deleteStudent(item)'>Delete</a>
+                    <li ng-repeat="item in students">
+                        <span ng-click="editing = true" ng-hide="editing">
+                            {{item.name}} <a ng-click="deleteStudent(item)">Delete</a>
+                        </span>
+                        <span class="form-group" ng-show="editing" ng-submit="editing = false">
+                            <form class = "form-inline" role="form">
+                                <input type="text" class="form-control input-sm" ng-model="item.name" placeholder="Name" required/>
+                                <button class="btn btn-default btn-sm" type="submit">Save</button>
+                            </form>
+                        </span>
                     </li>
                 </ul>
             </div>
